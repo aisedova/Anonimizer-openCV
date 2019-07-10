@@ -7,7 +7,7 @@ const float IMG_MEAN = 127.5f;
 const float IMG_INV_STDDEV = 1.f / 128.f;
 
 ProposalNetwork::ProposalNetwork(const ProposalNetwork::Config &config) {
-  _net = cv::dnn::readNetFromCaffe(config.protoText, config.caffeModel);
+  _net = cv::dnn::readNet(config.protoText, config.caffeModel);
   if (_net.empty()) {
     throw std::invalid_argument("invalid protoText or caffeModel");
   }
@@ -82,12 +82,15 @@ std::vector<Face> ProposalNetwork::run(const cv::Mat &img,
     _net.setInput(inputBlob, "data");
 
     const std::vector<cv::String> outBlobNames{"conv4-2", "prob1"};
-    std::vector<cv::Mat> outputBlobs;
+    std::vector<std::vector<cv::Mat>> outputBlobs;
 
-    _net.forward(outputBlobs, outBlobNames);
+    //_net.forward(outputBlobs, outBlobNames);
+	//we need cmake opencv+inference_engine with vc15
+	cv::Mat m = _net.forward();
 
-    cv::Mat regressionsBlob = outputBlobs[0];
-    cv::Mat scoresBlob = outputBlobs[1];
+//madness 
+	cv::Mat regressionsBlob = outputBlobs[0][0];
+    cv::Mat scoresBlob = outputBlobs[0][1];
 
     auto faces =
         buildFaces(scoresBlob, regressionsBlob, currentScale, _threshold);
