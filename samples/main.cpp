@@ -20,26 +20,23 @@ const char* cmdOptions =
 { "{video_name       | | video name                       }"
 "{start_frame      |0| Start frame                      }"
 "{frame_step       |1| Frame step                       }"
-"{proposal_model   | | Path to detector's Caffe model   }"
-"{proposal_weights | | Path to detector's Caffe weights }"
+"{Proposal_model   | | Path to detector's Caffe model   }"
+"{Proposal_weights | | Path to detector's Caffe weights }"
 "{Refine_model   | | Path to Refine's Caffe model   }"
 "{Refine_weights | | Path to Refine's Caffe weights }"
 "{Output_model   | | Path to Output's Caffe model   }"
 "{Output_weights | | Path to Output's Caffe weights }"
-"{desired_class_id |-1| The desired class that should be tracked }"
-"{desired_class_id |-1| The desired class that should be tracked }"
-"{classificator_model   | | Path to classificator's Caffe model   }"
-"{classificator_weights | | Path to classificator's Caffe weights }"
 };
 /*
--start_frame=200
--frame_step=4
--classificator_model="..\..\CV-SUMMER-CAMP\data\net\classification\squeezenet\1.1\caffe\squeezenet1.1.caffemodel"
--classificator_weights="..\..\CV-SUMMER-CAMP\data\net\classification\squeezenet\1.1\caffe\squeezenet1.1.prototxt"
--detector_model="C:\Users\temp2019\Desktop\CV-SUMMER-CAMP\data\object_detection\common\mobilenet-ssd\caffe\mobilenet-ssd.prototxt"
--detector_weights="C:\Users\temp2019\Desktop\CV-SUMMER-CAMP\data\object_detection\common\mobilenet-ssd\caffe\mobilenet-ssd.caffemodel"
--video_name="..\..\CV-SUMMER-CAMP\data\topdogs.mp4"
--desired_class_id=[12]
+-start_frame=0
+-frame_step=2
+-Proposal_model="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\p\caffe\mtcnn-p.caffemodel"
+-Proposal_weights="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\p\caffe\mtcnn-p.prototxt"
+-Refine_model="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\r\caffe\mtcnn-r.caffemodel"
+-Refine_weights="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\r\caffe\mtcnn-r.prototxt"
+-Output_model="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\o\caffe\mtcnn-o.caffemodel"
+-Output_weights="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\o\caffe\mtcnn-o.prototxt"
+-video_name="..\..\Anonimizer-openCV\data\men1.jpg"
 */
 
 
@@ -74,13 +71,7 @@ int main(int argc, char **argv) {
 	String video_name = parser.get<String>("video_name");
 	int start_frame = parser.get<int>("start_frame");
 	int frame_step = parser.get<int>("frame_step");
-	String detector_model = parser.get<String>("detector_model");
-	String detector_weights = parser.get<String>("detector_weights");
 
-	String classificator_model = parser.get<string>("classificator_model");
-	String classificator_weights = parser.get<String>("classificator_weights");
-	string class_ids = parser.get<string>("desired_class_id");
-	vector<int> desired_class_id;
 	//fs::path modelDir = fs::path(argv[1]);
 
 	ProposalNetwork::Config pConfig;
@@ -98,8 +89,8 @@ int main(int argc, char **argv) {
 	oConfig.protoText = parser.get<String>("Output_weights");
 	oConfig.threshold = 0.7f;
   
-  
-	cv::Mat img = cv::imread(argv[2]);
+	
+	cv::Mat img = cv::imread(parser.get<string>("video_name"));
 	
 	std::vector<Face> faces;
 	MTCNNDetector detector(pConfig, rConfig, oConfig);
