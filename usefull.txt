@@ -2,3 +2,5 @@
 
 cmake -DOpenCV_DIR="C:\Program Files (x86)\IntelSWTools\openvino_2019.1.133\opencv\cmake" -G "Visual Studio 15 2017 Win64" "..\Anonimizer-openCV"
 cmake -DWITH_INF_ENGINE=ON -DENABLE_CXX11=ON -DOpenCV_DIR="C:\Program Files (x86)\IntelSWTools\openvino_2019.1.133\opencv\cmake" -G "Visual Studio 15 2017 Win64" "..\Anonimizer-openCV"
+
+https://towardsdatascience.com/mtcnn-face-detection-cdcb20448ce0
