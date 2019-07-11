@@ -18,15 +18,15 @@ public:
     virtual Mat Classify(Mat image) = 0 {}
 };
 
-class DnnClassificator : public Classificator
+class DnnClassificator:Classificator
 {
-	String labelsPath;
-	int width, height;
-	Scalar mean;
+private:
 	Net net;
+	int width;
+	int height;
+	Scalar mean;
 	bool swapRB;
 public:
-	DnnClassificator(String pathToModel, String pathToConfing, String pathToLabels,
-		int inputWidth, int inputHeight, Scalar mean, bool swapRB = false);
+	DnnClassificator(string path_to_model, string path_to_config, int inputWidth, int inputHeight, Scalar mean, bool swapRG);
 	Mat Classify(Mat image) override;
 };

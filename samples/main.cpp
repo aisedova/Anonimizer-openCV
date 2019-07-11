@@ -7,7 +7,9 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 
+#include <detector_.h>
 #include <detector.h>
+
 
 //namespace fs = boost::filesystem;
 using namespace std;
@@ -30,13 +32,13 @@ const char* cmdOptions =
 /*
 -start_frame=0
 -frame_step=2
--Proposal_model="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\p\caffe\mtcnn-p.caffemodel"
--Proposal_weights="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\p\caffe\mtcnn-p.prototxt"
--Refine_model="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\r\caffe\mtcnn-r.caffemodel"
--Refine_weights="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\r\caffe\mtcnn-r.prototxt"
--Output_model="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\o\caffe\mtcnn-o.caffemodel"
--Output_weights="..\..\Anonimizer-openCV\models\object_detection\common\mtcnn\o\caffe\mtcnn-o.prototxt"
--video_name="..\..\Anonimizer-openCV\data\men1.jpg"
+-Proposal_model="..\..\CV-SUMMER-CAMP\models\object_detection\common\mtcnn\p\caffe\mtcnn-p.caffemodel"
+-Proposal_weights="..\..\CV-SUMMER-CAMP\models\object_detection\common\mtcnn\p\caffe\mtcnn-p.prototxt"
+-Refine_model="..\..\CV-SUMMER-CAMP\models\object_detection\common\mtcnn\r\caffe\mtcnn-r.caffemodel"
+-Refine_weights="..\..\CV-SUMMER-CAMP\models\object_detection\common\mtcnn\r\caffe\mtcnn-r.prototxt"
+-Output_model="..\..\CV-SUMMER-CAMP\models\object_detection\common\mtcnn\o\caffe\mtcnn-o.caffemodel"
+-Output_weights="..\..\CV-SUMMER-CAMP\models\object_detection\common\mtcnn\o\caffe\mtcnn-o.prototxt"
+-video_name="..\..\CV-SUMMER-CAMP\data\faces1.jpg"
 */
 
 
@@ -89,11 +91,13 @@ int main(int argc, char **argv) {
 	oConfig.protoText = parser.get<String>("Output_weights");
 	oConfig.threshold = 0.7f;
   
-	
+	MTCNNDetector detector(pConfig, rConfig, oConfig);
 	cv::Mat img = cv::imread(parser.get<string>("video_name"));
 	
 	std::vector<Face> faces;
-	MTCNNDetector detector(pConfig, rConfig, oConfig);
+	//std::vector<Faces> faces;
+	
+	//MTCNNDetector detector(pConfig.caffeModel,pConfig.protoText, rConfig.caffeModel, rConfig.protoText, oConfig.caffeModel, oConfig.protoText, 300,300);
 	
 	//boost::timer::auto_cpu_timer t(3, "%w seconds\n");
 	faces = detector.detect(img, 20.f, 0.709f);
@@ -120,6 +124,6 @@ int main(int argc, char **argv) {
 	auto resultImg = drawRectsAndPoints(img, data);
 	cv::imshow("test-oc", resultImg);
 	cv::waitKey(0);
-
+	
 	return 0;
 }

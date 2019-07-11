@@ -1,4 +1,4 @@
-#include "mtcnn/pnet.h"
+#include "pnet.h"
 
 const float P_NET_WINDOW_SIZE = 12.f;
 const int P_NET_STRIDE = 2;
@@ -82,15 +82,15 @@ std::vector<Face> ProposalNetwork::run(const cv::Mat &img,
     _net.setInput(inputBlob, "data");
 
     const std::vector<cv::String> outBlobNames{"conv4-2", "prob1"};
-    std::vector<std::vector<cv::Mat>> outputBlobs;
+    std::vector<cv::Mat> outputBlobs;
 
-    //_net.forward(outputBlobs, outBlobNames);
+    _net.forward(outputBlobs, outBlobNames);
 	//we need cmake opencv+inference_engine with vc15
-	cv::Mat m = _net.forward();
+	//cv::Mat m = _net.forward();
 
 //madness 
-	cv::Mat regressionsBlob = outputBlobs[0][0];
-    cv::Mat scoresBlob = outputBlobs[0][1];
+	cv::Mat regressionsBlob = outputBlobs[0];
+    cv::Mat scoresBlob = outputBlobs[1];
 
     auto faces =
         buildFaces(scoresBlob, regressionsBlob, currentScale, _threshold);

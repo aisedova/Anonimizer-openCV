@@ -1,5 +1,5 @@
-#include "mtcnn/rnet.h"
-#include "mtcnn/helpers.h"
+#include "rnet.h"
+#include "helpers.h"
 
 const int INPUT_DATA_WIDTH = 24;
 const int INPUT_DATA_HEIGHT = 24;
