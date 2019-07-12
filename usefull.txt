@@ -6,7 +6,13 @@
 -start_frame=0 -frame_step=2 -Proposal_model="..\..\CV-SUMMER-CAMP\data\models\object_detection\common\mtcnn\p\caffe\mtcnn-p.caffemodel" -Proposal_weights="..\..\CV-SUMMER-CAMP\data\models\object_detection\common\mtcnn\p\caffe\mtcnn-p.prototxt" -Refine_model="..\..\CV-SUMMER-CAMP\data\models\object_detection\common\mtcnn\r\caffe\mtcnn-r.caffemodel" -Refine_weights="..\..\CV-SUMMER-CAMP\data\models\object_detection\common\mtcnn\r\caffe\mtcnn-r.prototxt" -Output_model="..\..\CV-SUMMER-CAMP\data\models\object_detection\common\mtcnn\o\caffe\mtcnn-o.caffemodel" -Output_weights="..\..\CV-SUMMER-CAMP\data\models\object_detection\common\mtcnn\o\caffe\mtcnn-o.prototxt" -video_name="..\..\CV-SUMMER-CAMP\data\faces1.jpg"
 
 
-
-cmake -DOpenCV_DIR="C:\Program Files (x86)\IntelSWTools\openvino_2019.1.133\opencv\cmake" -G "Visual Studio 15 2017 Win64" "..\Anonimizer-openCV"
 C:\Users\temp2019\Desktop\hooly shit\Anonimizer-openCV-build>cmake -DInference_Engine_DIR="C:\Program Files (x86)\IntelSWTools\openvino_2019.1.133\inference_engine\share" -G "Visual Studio 15 2017 Win64" "..\Anonimizer-openCV"
 cmake -DWITH_INF_ENGINE=ON -DENABLE_CXX11=ON -DOpenCV_DIR="C:\Program Files (x86)\IntelSWTools\openvino_2019.1.133\opencv\cmake" -G "Visual Studio 15 2017 Win64" "..\Anonimizer-openCV"
+cmake -DWITH_INF_ENGINE=ON -DENABLE_CXX11=ON -DOpenCV_DIR="C:\Program Files (x86)\IntelSWTools\openvino_2019.1.133\opencv\cmake" -G "Visual Studio 15 2017 Win64" "..\Anonimizer-openCV"
+
+https://towardsdatascience.com/mtcnn-face-detection-cdcb20448ce0
+
+
+
+cmake -DOpenCV_DIR="C:\Program Files (x86)\IntelSWTools\openvino_2019.1.133\opencv\cmake" -G "Visual Studio 15 2017 Win64" "..\Anonimizer-openCV"
+
