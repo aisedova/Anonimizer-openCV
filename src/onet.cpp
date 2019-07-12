@@ -1,5 +1,5 @@
-#include "mtcnn/onet.h"
-#include "mtcnn/helpers.h"
+#include "onet.h"
+#include "helpers.h"
 
 const int INPUT_DATA_WIDTH = 48;
 const int INPUT_DATA_HEIGHT = 48;
