@@ -15,15 +15,15 @@ using namespace std;
 class Detector
 {
 public:
-    virtual vector<DetectedObject> Detect(Mat image) = 0 {}
+	virtual vector<DetectedObject> detect (Mat image, const float minFaceSize, const float scaleFactor) = 0;
 };
 
 class DnnDetector : public Detector
 {
 private:
-	Net net;
+	Net pnet,rnet,onet;
 	int width, height;
 public:
-	DnnDetector(String pathToConfig, String pathToModel, int w, int h);
-	vector<DetectedObject> Detect(Mat image) override;
+	DnnDetector(String pModel, String pConfig, String rModel, String rConfig, String oModel, String oConfig, int w, int h);
+	vector<DetectedObject> detect(Mat image, const float minFaceSize, const float scaleFactor) override;
 };

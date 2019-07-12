@@ -4,7 +4,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake")
 
 # Create new Visual Studio solution
-set(PROJECT_NAME CV_ANONIMIZER)
+set(PROJECT_NAME CV_SUMMER_CAMP)
 project(${PROJECT_NAME})
 set(LIBRARY "${PROJECT_NAME}_lib")
 
